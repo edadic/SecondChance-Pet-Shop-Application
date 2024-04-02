@@ -1,0 +1,91 @@
+<!-- Section: Design Block -->
+<section class="text-center text-lg-start">
+  <!-- Sign Up Page -->
+  <div class="container py-4">
+    <div class="row g-0 align-items-center">
+      <div class="col-lg-6 mb-5 mb-lg-0">
+        <div
+          class="card cascading-right"
+          style="
+            background: hsla(0, 0%, 100%, 0.55);
+            backdrop-filter: blur(30px);
+          "
+        >
+          <div class="card-body p-5 shadow-5 text-center">
+            <h2 class="fw-bold mb-5">Sign up now</h2>
+            <form name="sign-up" id="signUpForm">
+              <div class="form-outline mb-6">
+                <input
+                  type="email"
+                  name="email"
+                  class="form-control p-4"
+                  id="email"
+                  required
+                />
+                <label class="form-label" for="email">Email address</label>
+              </div>
+              <div class="form-outline mb-6">
+                <input
+                  type="password"
+                  name="password"
+                  class="form-control p-4"
+                  id="password"
+                  required
+                />
+                <label class="form-label" for="password">Password</label>
+              </div>
+              <div class="form-outline mb-6">
+                <input
+                  type="password"
+                  name="passwordconfirm"
+                  class="form-control p-4"
+                  id="passwordconfirm"
+                  required
+                />
+                <label class="form-label" for="password">Repeat password</label>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block mb-4">
+                Sign up
+              </button>
+              <div class="text-center">
+                <a href="#log-in" class="btn btn-link btn-floating mx-1"
+                  >Already have an account?</a
+                >
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 mb-5 mb-lg-0">
+        <img
+          src="img/login1.jpeg"
+          class="w-100 rounded-10 shadow-0"
+          alt="Dog and cat"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("signUpForm");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      let formData = {};
+      new FormData(form).forEach((value, key) => {
+        formData[key] = value;
+      });
+
+      if (formData.password === formData.passwordconfirm) {
+        console.log(formData);
+        alert("Sign up successful!");
+        window.location.href = "#account";
+        form.reset();
+      } else {
+        alert("Passwords do not match. Please try again.");
+      }
+    });
+  });
+</script>

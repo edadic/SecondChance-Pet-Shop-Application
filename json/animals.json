@@ -1,0 +1,109 @@
+{
+    "dogs": [
+        {
+            "name": "Oddie",
+            "breed": "Beagle",
+            "photo": "img/beagle1.png"
+        },
+        {
+            "name": "Bongo",
+            "breed": "Boxer",
+            "photo": "img/boxer.jpg"
+        },
+        {
+            "name": "Cupcake",
+            "breed": "Bulldog",
+            "photo": "img/bulldog.jpg"
+        },
+        {
+            "name": "Princess",
+            "breed": "Pit Bull",
+            "photo": "img/pitbull.jpg"
+        },
+        {
+            "name": "Mickey",
+            "breed": "Chihuahua",
+            "photo": "img/chihuahua.jpg"
+        },
+        {
+            "name": "Teddy",
+            "breed": "Golden Retriever",
+            "photo": "img/goldenretriever.jpg"
+        },
+        {
+            "name": "Nala",
+            "breed": "Poodle",
+            "photo": "img/poodle.jpg"
+        },
+        {
+            "name": "Lila",
+            "breed": "Husky",
+            "photo": "img/husky.jpg"
+        }
+    ],
+    "cats": [
+        {
+            "name": "Whiskers",
+            "breed": "Siamese",
+            "photo": "img/siamese.jpeg"
+        },
+        {
+            "name": "Ivy",
+            "breed": "Persian",
+            "photo": "img/persian1.jpeg"
+        },
+        {
+            "name": "Poppy",
+            "breed": "Ragdoll",
+            "photo": "img/ragdoll.jpeg"
+        },
+        {
+            "name": "Misty",
+            "breed": "Bengal",
+            "photo": "img/bengal1.jpeg"
+        },
+        {
+            "name": "Daisy",
+            "breed": "Bombay",
+            "photo": "img/bombay.jpeg"
+        },
+        {
+            "name": "Luna",
+            "breed": "American Shorthair",
+            "photo": "img/shorthair.jpeg"
+        },
+        {
+            "name": "Tilly",
+            "breed": "Himalayan",
+            "photo": "img/himalayan.jpeg"
+        },
+        {
+            "name": "Ezra",
+            "breed": "Birman",
+            "photo": "img/birman.jpeg"
+        }
+    ],
+    "therapyAnimals": [
+        {
+            "name": "Charlie",
+            "breed": "Beagle",
+            "photo": "img/beagle.jpeg"
+        },
+        {
+            "name": "Biscuit",
+            "breed": "Golden Retriever",
+            "photo": "img/golden.jpg"
+        },
+        {
+            "name": "Cinnamon",
+            "breed": "Ragdoll",
+            "photo": "img/ragdoll2.jpg"
+        },
+        {
+            "name": "Atlas",
+            "breed": "Persian",
+            "photo": "img/persian.jpeg"
+        }
+        
+    ]
+}

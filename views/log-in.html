@@ -1,0 +1,110 @@
+<!-- Section: Design Block -->
+<section class="text-center text-lg-start">
+  <style>
+    .cascading-right {
+      margin-right: -50px;
+    }
+
+    @media (max-width: 991.98px) {
+      .cascading-right {
+        margin-right: 0;
+      }
+    }
+  </style>
+
+  <!-- Sign Up Page -->
+  <div class="container py-4">
+    <div class="row g-0 align-items-center">
+      <div class="col-lg-6 mb-5 mb-lg-0">
+        <div
+          class="card cascading-right"
+          style="
+            background: hsla(0, 0%, 100%, 0.55);
+            backdrop-filter: blur(30px);
+          "
+        >
+          <div class="card-body p-5 shadow-5 text-center">
+            <h2 class="fw-bold mb-5">Log in now</h2>
+            <form name="log-in" id="loginForm" validate="validate">
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <input
+                  type="email"
+                  name="email"
+                  class="form-control p-4"
+                  id="email"
+                  required="required"
+                />
+                <label class="form-label" for="email">Email address</label>
+              </div>
+
+              <!-- Password input -->
+              <div class="form-outline mb-4">
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  class="form-control p-4"
+                  required="required"
+                />
+                <label class="form-label" for="form3Example4">Password</label>
+              </div>
+
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-primary btn-block mb-4">
+                Log in
+              </button>
+
+              <!-- Register buttons -->
+              <div class="text-center">
+                <a href="#sign-up" class="btn btn-link btn-floating mx-1"
+                  >Don't have an account?</a
+                >
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-5 mb-lg-0">
+        <img
+          src="img/login1.jpeg"
+          class="w-100 rounded-10 shadow-0"
+          alt="Dog and cat"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section: Design Block -->
+<script>
+  document
+    .getElementById("loginForm")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const enteredUsername = document.getElementById("email").value;
+      const enteredPassword = document.getElementById("password").value;
+
+      fetch(
+        "/Web_programming_2024_edadic/web-project/edadic-Web_programming_2024_edadic/json/users.json"
+      )
+        .then((response) => response.json())
+        .then((users) => {
+          const user = users.find(
+            (user) =>
+              user.email === enteredUsername &&
+              user.password === enteredPassword
+          );
+
+          if (user) {
+            console.log(user);
+            alert("Login successful");
+            window.location.href = "#home";
+          } else {
+            alert("You don't have an account yet. Please sign up.");
+          }
+        })
+        .catch((error) => console.error("Error:", error));
+    });
+</script>

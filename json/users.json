@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Eldar",
+    "surname": "Dadic",
+    "email": "eldar.dadic@stu.ibu.edu.ba",
+    "password": "eldar123",
+    "phone": "061-123-456",
+    "city": "Sarajevo",
+    "addressLine1": "Gradacacka",
+    "addressLine2": "118",
+    "zipCode": "71000"
+  }
+]

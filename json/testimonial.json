@@ -1,0 +1,24 @@
+{
+  "testimonials": [
+    {
+      "name": "John Smith",
+      "image": "img/testimonial-1.jpg",
+      "comment": "Second Chance made the adoption process smooth and stress-free—I found my new best friend!"
+    },
+    {
+      "name": "Jennifer Wilson",
+      "image": "img/testimonial-3.jpg",
+      "comment": "The pet therapy program at Second Chance has been incredibly beneficial for my child with special needs."
+    },
+    {
+      "name": "Jason Derulo",
+      "image": "img/testimonial-2.jpg",
+      "comment": "The staff at Second Chance truly care about the well-being of their animals and it shows."
+    },
+    {
+      "name": "Amanda Thompson",
+      "image": "img/testimonial-4.jpg",
+      "comment": "I can't thank Second Chance enough for matching me with the perfect furry companion!"
+    }
+  ]
+}
