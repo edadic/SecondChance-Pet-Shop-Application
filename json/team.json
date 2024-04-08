@@ -1,0 +1,40 @@
+{
+    "team": [
+        {
+            "name": "Emily Johnson",
+            "position": "Founder & CEO",
+            "image": "img/team-1.jpg",
+            "facebook": "https://www.facebook.com/login/",
+            "twitter": "https://twitter.com/i/flow/login",
+            "linkedin": "https://www.linkedin.com/home",
+            "instagram": "https://www.instagram.com"
+        },
+        {
+            "name": "David Brown",
+            "position": "Veterinarian",
+            "image": "img/team-2.jpg",
+            "facebook": "https://www.facebook.com/login/",
+            "twitter": "https://twitter.com/i/flow/login",
+            "linkedin": "https://www.linkedin.com/home",
+            "instagram": "https://www.instagram.com"
+        },
+        {
+            "name": "Sarah Taylor",
+            "position": "Veterinarian",
+            "image": "img/team-3.jpg",
+            "facebook": "https://www.facebook.com/login/",
+            "twitter": "https://twitter.com/i/flow/login",
+            "linkedin": "https://www.linkedin.com/home",
+            "instagram": "https://www.instagram.com"
+        },
+        {
+            "name": "James Roberts",
+            "position": "Volunteer",
+            "image": "img/team-4.jpg",
+            "facebook": "https://www.facebook.com/login/",
+            "twitter": "https://twitter.com/i/flow/login",
+            "linkedin": "https://www.linkedin.com/home",
+            "instagram": "https://www.instagram.com"
+        }
+    ]
+}

@@ -15,7 +15,7 @@ $(function () {
             $this.prop("disabled", true);
 
             $.ajax({
-                url: "contact.php",
+                url: "/Web_programming_2024_edadic/web-project/edadic-Web_programming_2024_edadic/mail/contact.php",
                 type: "POST",
                 data: {
                     name: name,
