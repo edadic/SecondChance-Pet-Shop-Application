@@ -53,7 +53,7 @@
 <div class="container-fluid bg-light">
   <div class="container">
     <div class="col-lg-12">
-      <form class="py-5" id="bookingForm">
+      <form class="py-5" id="booking-form-home">
         <div class="form-group">
           <input
             name="name"
@@ -79,6 +79,7 @@
               type="text"
               class="form-control border-0 p-4 datetimepicker-input"
               placeholder="Reservation Date"
+              required="required"
               data-target="#date"
               data-toggle="datetimepicker"
             />
@@ -91,6 +92,7 @@
               type="text"
               class="form-control border-0 p-4 datetimepicker-input"
               placeholder="Reservation Time"
+              required="required"
               data-target="#time"
               data-toggle="datetimepicker"
             />
@@ -98,14 +100,37 @@
         </div>
         <div class="form-group">
           <select
-            name="service"
+            name="service_ID"
             class="custom-select border-0 px-4"
             style="height: 47px"
           >
             <option selected>Select A Service</option>
-            <option value="Adoption">Adoption</option>
-            <option value="Pet Therapy">Pet Therapy</option>
+            <option value="3">Adoption dogs</option>
+            <option value="2">Adoption cats</option>
+            <option value="1">Pet Therapy</option>
           </select>
+          <div class="alert alert-success" role="alert">
+            Booking added successfully!
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="alert alert-danger" role="alert">
+            Error adding booking. Please try again later.
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
         </div>
         <div>
           <button class="btn btn-dark btn-block border-0 py-3" type="submit">
@@ -228,111 +253,6 @@
   </div>
 </div>
 <!-- Testimonial End -->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    fetchTestimonials();
-  });
-
-  function fetchTestimonials() {
-    fetch(
-      "/Web_programming_2024_edadic/web-project/edadic-Web_programming_2024_edadic/json/testimonial.json"
-    ) // Adjust this path to the correct location of your testimonial.json file
-      .then((response) => response.json())
-      .then((data) => {
-        const testimonialsContainer = document.getElementById(
-          "testimonials-container"
-        );
-
-        data.testimonials.forEach((testimonial) => {
-          const testimonialCard = document.createElement("div");
-          testimonialCard.className = "col-md-4 mb-4 testimonial-card"; // Set up columns for a 3-column layout
-          testimonialCard.innerHTML = `
-          <div class="card">
-            <img class="card-img-top" src="${testimonial.image}" alt="Testimonial image">
-            <div class="card-body">
-              <h5 class="card-title">${testimonial.name}</h5>
-              <p class="card-text">${testimonial.comment}</p>
-            </div>
-          </div>
-        `;
-          testimonialsContainer.appendChild(testimonialCard);
-        });
-      })
-      .catch((error) => {
-        console.error("Error fetching testimonials:", error);
-      });
-  }
-</script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    fetchTeamMembers();
-  });
-
-  function fetchTeamMembers() {
-    fetch(
-      "/Web_programming_2024_edadic/web-project/edadic-Web_programming_2024_edadic/json/team.json"
-    ) // Adjust the path to your JSON file as needed
-      .then((response) => response.json())
-      .then((data) => {
-        const teamContainer = document.getElementById("team-members");
-        data.team.forEach((member) => {
-          const memberElement = `
-                        <div class="col-lg-3 col-md-6">
-                            <div class="team card position-relative overflow-hidden border-0 mb-4">
-                                <img class="card-img-top" src="${member.image}" alt="${member.name}">
-                                <div class="card-body text-center p-0">
-                                    <div class="team-text d-flex flex-column justify-content-center bg-light">
-                                        <h5>${member.name}</h5>
-                                        <i>${member.position}</i>
-                                    </div>
-                                    <div class="team-social d-flex align-items-center justify-content-center bg-dark">
-                                        <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="${member.facebook}" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                                        <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="${member.twitter}" target="_blank"><i class="fab fa-twitter"></i></a>
-                                        <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="${member.linkedin}"target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                                        <a class="btn btn-outline-primary rounded-circle text-center px-0" style="width: 36px; height: 36px;" href="${member.instagram}"target="_blank"><i class="fab fa-instagram"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-          teamContainer.innerHTML += memberElement;
-        });
-      })
-      .catch((error) => {
-        console.error("Failed to load team members:", error);
-      });
-  }
-</script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Target the form by its ID
-    const form = document.getElementById("bookingForm");
-
-    // Listen for form submission
-    form.addEventListener("submit", function (event) {
-      // Prevent the form from submitting the traditional way
-      event.preventDefault();
-
-      // Initialize an object to store form data
-      let formData = {};
-
-      // Use FormData to capture the form data
-      new FormData(form).forEach((value, key) => {
-        formData[key] = value;
-      });
-
-      // Log the formData object to the console
-      console.log(formData);
-
-      // Alert the user that the form was successfully submitted
-      alert("Successfully booked!");
-
-      // Clear the form fields
-      form.reset();
-    });
-  });
-</script>
 
 <style>
   #testimonials-container {

@@ -77,34 +77,3 @@
   </div>
 </section>
 <!-- Section: Design Block -->
-<script>
-  document
-    .getElementById("loginForm")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      const enteredUsername = document.getElementById("email").value;
-      const enteredPassword = document.getElementById("password").value;
-
-      fetch(
-        "/Web_programming_2024_edadic/web-project/edadic-Web_programming_2024_edadic/json/users.json"
-      )
-        .then((response) => response.json())
-        .then((users) => {
-          const user = users.find(
-            (user) =>
-              user.email === enteredUsername &&
-              user.password === enteredPassword
-          );
-
-          if (user) {
-            console.log(user);
-            alert("Login successful");
-            window.location.href = "#home";
-          } else {
-            alert("You don't have an account yet. Please sign up.");
-          }
-        })
-        .catch((error) => console.error("Error:", error));
-    });
-</script>

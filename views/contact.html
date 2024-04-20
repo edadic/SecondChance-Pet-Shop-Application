@@ -10,7 +10,7 @@
     <div class="col-12 col-sm-8 mb-5">
       <div class="contact-form">
         <div id="success"></div>
-        <form name="sentMessage" id="contactForm" validate="validate">
+        <form name="sentMessage" id="contact-form" validate="validate">
           <div class="control-group">
             <input
               name="name"
@@ -74,30 +74,3 @@
   </div>
 </div>
 <!-- Contact End -->
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Target the form by its ID
-    const form = document.getElementById("contactForm");
-
-    // Listen for form submission
-    form.addEventListener("submit", function (event) {
-      // Prevent the form from submitting the traditional way
-      event.preventDefault();
-
-      // Initialize an object to store form data
-      let formData = {};
-
-      // Use FormData to capture the form data
-      new FormData(form).forEach((value, key) => {
-        formData[key] = value;
-      });
-
-      // Log the formData object to the console
-      console.log(formData);
-
-      // If you wish to see the data as a string
-      console.log(JSON.stringify(formData));
-    });
-  });
-</script>

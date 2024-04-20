@@ -32,56 +32,5 @@
     </div>
   </div>
 </div>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    fetchAnimals();
-  });
-
-  function fetchAnimals() {
-    fetch(
-      "/Web_programming_2024_edadic/web-project/edadic-Web_programming_2024_edadic/json/animals.json"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        populateAnimals(data.dogs, "dogs-row");
-        populateAnimals(data.cats, "cats-row");
-        populateAnimals(data.therapyAnimals, "therapy-row");
-      })
-      .catch((error) => console.error("Error loading the animal data:", error));
-  }
-
-  function populateAnimals(animals, sectionId) {
-    const section = document.getElementById(sectionId);
-    if (!section) {
-      console.error("Section not found:", sectionId);
-      return;
-    }
-
-    // Clear the section
-    section.innerHTML = "";
-
-    // Create a card for each animal and add it to the section
-    animals.forEach((animal) => {
-      const card = `
-            <div class="col-lg-3 col-md-6">
-                <div class="team card position-relative overflow-hidden border-0 mb-4">
-                    <img class="card-img-top" src="${animal.photo}" alt="">
-                    <div class="card-body text-center p-0">
-                        <div class="team-text d-flex flex-column justify-content-center bg-light">
-                            <h5>${animal.name}</h5>
-                            <i>${animal.breed}</i>
-                        </div>
-                        <div class="team-social d-flex align-items-center justify-content-center bg-dark">
-                            <a href="#booking" class="btn btn-lg btn-primary mt-4 mt-md-1 px-2">Book a Visit</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-
-      section.innerHTML += card;
-    });
-  }
-</script>
 
 <!-- Services End -->

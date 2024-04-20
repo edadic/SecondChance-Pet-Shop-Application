@@ -16,6 +16,17 @@
             <form name="sign-up" id="signUpForm">
               <div class="form-outline mb-6">
                 <input
+                  type="text"
+                  name="name"
+                  class="form-control p-4"
+                  id="name"
+                  required
+                />
+                <label class="form-label">Name</label>
+              </div>
+
+              <div class="form-outline mb-6">
+                <input
                   type="email"
                   name="email"
                   class="form-control p-4"
@@ -44,7 +55,46 @@
                 />
                 <label class="form-label" for="password">Repeat password</label>
               </div>
-
+              <div class="form-outline mb-6">
+                <input
+                  type="text"
+                  name="address1"
+                  class="form-control p-4"
+                  id="address1"
+                  required
+                />
+                <label class="form-label">Address Line 1</label>
+              </div>
+              <div class="form-outline mb-6">
+                <input
+                  type="text"
+                  name="address2"
+                  class="form-control p-4"
+                  id="address2"
+                  required
+                />
+                <label class="form-label">Address Line 2</label>
+              </div>
+              <div class="form-outline mb-6">
+                <input
+                  type="text"
+                  name="zip"
+                  class="form-control p-4"
+                  id="zip"
+                  required
+                />
+                <label class="form-label">Zip Code</label>
+              </div>
+              <div class="form-outline mb-6">
+                <input
+                  type="text"
+                  name="city"
+                  class="form-control p-4"
+                  id="city"
+                  required
+                />
+                <label class="form-label">City</label>
+              </div>
               <button type="submit" class="btn btn-primary btn-block mb-4">
                 Sign up
               </button>
@@ -67,25 +117,3 @@
     </div>
   </div>
 </section>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("signUpForm");
-
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
-      let formData = {};
-      new FormData(form).forEach((value, key) => {
-        formData[key] = value;
-      });
-
-      if (formData.password === formData.passwordconfirm) {
-        console.log(formData);
-        alert("Sign up successful!");
-        window.location.href = "#account";
-        form.reset();
-      } else {
-        alert("Passwords do not match. Please try again.");
-      }
-    });
-  });
-</script>

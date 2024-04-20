@@ -58,50 +58,15 @@
     <!-- Features End -->
 
 
-    <!-- Team Start -->
-    <div class="container mt-5 pt-5 pb-3">
-        <div class="d-flex flex-column text-center mb-5">
-            <h1 class="display-4 m-0">Meet Our <span class="text-primary">Team Members</span></h1>
-        </div>
-        <div class="row" id="team-members">
-        </div>
+
+<!-- Team Start -->
+<div class="container mt-5 pt-5 pb-3">
+    <div class="d-flex flex-column text-center mb-5">
+      <h1 class="display-4 m-0">
+        Meet Our <span class="text-primary">Team Members</span>
+      </h1>
     </div>
-    <!-- Team End -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            fetchTeamMembers();
-        });
-        
-        function fetchTeamMembers() {
-            fetch('/Web_programming_2024_edadic/web-project/edadic-Web_programming_2024_edadic/json/team.json') // Adjust the path to your JSON file as needed
-            .then(response => response.json())
-            .then(data => {
-                const teamContainer = document.getElementById('team-members');
-                data.team.forEach(member => {
-                    const memberElement = `
-                        <div class="col-lg-3 col-md-6">
-                            <div class="team card position-relative overflow-hidden border-0 mb-4">
-                                <img class="card-img-top" src="${member.image}" alt="${member.name}">
-                                <div class="card-body text-center p-0">
-                                    <div class="team-text d-flex flex-column justify-content-center bg-light">
-                                        <h5>${member.name}</h5>
-                                        <i>${member.position}</i>
-                                    </div>
-                                    <div class="team-social d-flex align-items-center justify-content-center bg-dark">
-                                        <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="${member.facebook}" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                                        <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="${member.twitter}"><i class="fab fa-twitter"></i></a>
-                                        <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 36px; height: 36px;" href="${member.linkedin}"><i class="fab fa-linkedin-in"></i></a>
-                                        <a class="btn btn-outline-primary rounded-circle text-center px-0" style="width: 36px; height: 36px;" href="${member.instagram}"><i class="fab fa-instagram"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    teamContainer.innerHTML += memberElement;
-                });
-            })
-            .catch(error => {
-                console.error('Failed to load team members:', error);
-            });
-        }
-        </script>
+    <div class="row" id="team-members-about"></div>
+  </div>
+  <!-- Team End -->
+
