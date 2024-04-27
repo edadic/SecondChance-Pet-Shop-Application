@@ -9,7 +9,6 @@
           src="img/avatar.jpeg"
           alt="Avatar"
         />
-        <span class="text-black-50" id="email">name@mail.com</span>
       </div>
     </div>
     <!-- Personal Information Form -->
@@ -18,15 +17,33 @@
         <form id="personal-info-form">
           <div class="form-group">
             <label class="labels">Name</label>
-            <input id="name" type="text" class="form-control" required />
+            <input
+              id="name"
+              name="name"
+              type="text"
+              class="form-control"
+              required
+            />
           </div>
           <div class="form-group">
-            <label class="labels">Surname</label>
-            <input id="surname" type="text" class="form-control" required />
+            <label class="labels">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              class="form-control"
+              required
+            />
           </div>
           <div class="form-group">
             <label class="labels">Mobile Number</label>
-            <input id="phone" type="text" class="form-control" required />
+            <input
+              id="phone"
+              name="mobile_number"
+              type="text"
+              class="form-control"
+              required
+            />
           </div>
           <button
             id="update-button"
@@ -46,6 +63,7 @@
             <label class="labels">Address Line 1</label>
             <input
               id="addressLine1"
+              name="address_line1"
               type="text"
               class="form-control"
               required
@@ -55,6 +73,7 @@
             <label class="labels">Address Line 2</label>
             <input
               id="addressLine2"
+              name="address_line2"
               type="text"
               class="form-control"
               required
@@ -62,11 +81,23 @@
           </div>
           <div class="form-group">
             <label class="labels">City</label>
-            <input id="city" type="text" class="form-control" required />
+            <input
+              id="city"
+              name="city"
+              type="text"
+              class="form-control"
+              required
+            />
           </div>
           <div class="form-group">
             <label class="labels">Zip Code</label>
-            <input id="zipCode" type="text" class="form-control" required />
+            <input
+              id="zipCode"
+              name="zip_code"
+              type="text"
+              class="form-control"
+              required
+            />
           </div>
           <button
             id="address-button"
@@ -80,40 +111,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    document
-      .getElementById("update-button")
-      .addEventListener("click", function () {
-        let personalForm = document.getElementById("personal-info-form");
-        if (personalForm.checkValidity()) {
-          const personalInfo = {
-            name: document.getElementById("name").value,
-            surname: document.getElementById("surname").value,
-            phone: document.getElementById("phone").value,
-          };
-          console.log("Personal Information:", personalInfo);
-        } else {
-          personalForm.reportValidity();
-        }
-      });
-
-    document
-      .getElementById("address-button")
-      .addEventListener("click", function () {
-        let addressForm = document.getElementById("address-form");
-        if (addressForm.checkValidity()) {
-          const addressInfo = {
-            addressLine1: document.getElementById("addressLine1").value,
-            addressLine2: document.getElementById("addressLine2").value,
-            city: document.getElementById("city").value,
-            zipCode: document.getElementById("zipCode").value,
-          };
-          console.log("Address Information:", addressInfo);
-        } else {
-          addressForm.reportValidity();
-        }
-      });
-  });
-</script>
