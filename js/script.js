@@ -1,105 +1,233 @@
-console.log("Script loaded");
-var app = $.spapp({
-  defaultView: "#home",
-  templateDir: "./scss/",
-  pageNotFound: "error_404",
-  reloadView: true,
-});
+$(document).ready(function () {
+  const currentUser = window.localStorage.getItem("user");
+  if (currentUser) {
+    console.log("Current user", currentUser);
+    $("#login-link").addClass("d-none");
+    $("#logout-link").removeClass("d-none");
+    $("#account-link").removeClass("d-none");
+  }
 
-app.route({
-  view: "home",
-  load: "home.html",
-  onCreate: function () {},
-  onReady: function () {
-    console.log("Home is ready");
-    console.log("constants", Constants.API_BASE_URL);
-    initBookingForm("booking-form-home");
-    fetchTestimonials();
-    fetchTeamMembers("team-members");
-    activePage();
-  },
-});
+  console.log("Script loaded");
+  var app = $.spapp({
+    defaultView: "#home",
+    templateDir: "./views/",
+    pageNotFound: "error_404",
+    reloadView: true,
+  });
 
-app.route({
-  view: "about",
-  load: "about.html",
-  onCreate: function () {},
-  onReady: function () {
-    console.log("About is ready");
-    fetchTeamMembers("team-members-about");
-    activePage();
-  },
-});
+  app.route({
+    view: "home",
+    load: "home.html",
+    onCreate: function () {},
+    onReady: function () {
+      console.log("Home is ready");
+      console.log("constants", Constants.API_BASE_URL);
+      initBookingForm("booking-form-home");
+      fetchTestimonials();
+      fetchTeamMembers("team-members");
+    },
+  });
 
-app.route({
-  view: "service",
-  load: "service.html",
-  onCreate: function () {},
-  onReady: function () {
-    console.log("Service is ready");
-    fetchAnimals();
-    activePage();
-  },
-});
+  app.route({
+    view: "about",
+    load: "about.html",
+    onCreate: function () {},
+    onReady: function () {
+      console.log("About is ready");
+      fetchTeamMembers("team-members-about");
+    },
+  });
 
-app.route({
-  view: "sign-up",
-  load: "sign-up.html",
-  onCreate: function () {},
-  onReady: function () {
-    activePage();
-    console.log("sign up is ready");
-    document.addEventListener("DOMContentLoaded", function () {
-      const form = document.getElementById("signUpForm");
+  app.route({
+    view: "service",
+    load: "service.html",
+    onCreate: function () {},
+    onReady: function () {
+      console.log("Service is ready");
+      fetchAnimals();
+    },
+  });
+  //Logout app route
+  app.route({
+    view: "logout",
+    load: "logout.html",
+    onCreate: function () {},
+    onReady: function () {
+      console.log("Logout is ready!");
+      window.localStorage.clear();
+      window.location.hash = "#home";
+      window.location.reload();
+    },
+  });
 
-      form.addEventListener("submit", function (event) {
-        event.preventDefault();
-        signup(form);
-      });
-    });
-  },
-});
-
-app.route({
-  view: "login",
-  load: "login.html",
-  onCreate: function () {},
-  onReady: function () {
-    console.log("Login is ready");
-    activePage();
-    setTimeout(function () {
-      document
-        .getElementById("loginForm")
-        .addEventListener("submit", function (event) {
+  app.route({
+    view: "log-in",
+    load: "log-in.html",
+    onCreate: function () {},
+    onReady: function () {
+      console.log("Signin is ready!");
+      $("#signin-form").validate({
+        rules: {
+          password: "required",
+          email: {
+            required: true,
+            email: true,
+          },
+        },
+        invalidHandler: function (event, validator) {
+          console.log("Invalid form login");
+          $(".alert-danger").show();
+        },
+        submitHandler: function (form, event) {
+          console.log("Sending login request...");
           event.preventDefault();
-          let enteredUsername = document.getElementById("email").value;
-          let enteredPassword = document.getElementById("password").value;
-          login(enteredUsername, enteredPassword);
+          let data = {};
+          $.each($(form).serializeArray(), function () {
+            console.log(this.name, this.value);
+            data[this.name] = this.value;
+          });
+
+          console.log("valid form", data);
+          RestClient.post(
+            "login",
+            data,
+            function (response) {
+              console.log("User logged in", response);
+              window.localStorage.setItem("token", response.token);
+              window.localStorage.setItem("user", response.name);
+              window.location.hash = "#home";
+              window.location.reload("/");
+            },
+            function (error) {
+              $(".alert-danger").show();
+            }
+          );
+        },
+      });
+    },
+  });
+
+  app.route({
+    view: "contact",
+    load: "contact.html",
+    onCreate: function () {},
+    onReady: function () {
+      console.log("Contact is ready");
+      initContactForm("contact-form");
+    },
+  });
+
+  app.route({
+    view: "booking",
+    load: "booking.html",
+    onCreate: function () {},
+    onReady: function () {
+      console.log("Booking is ready");
+      initBookingForm("booking-form");
+    },
+  });
+
+  app.route({
+    view: "account",
+    load: "account.html",
+    onCreate: function () {},
+    onReady: function () {
+      console.log("Account is ready!");
+      RestClient.get("users/current", function (data) {
+        console.log("Current user: ", data);
+        $("#name").val(data.name);
+        $("#phone").val(data.mobile_number);
+        $("#addressLine1").val(data.address_line1);
+        $("#addressLine2").val(data.address_line2);
+        $("#city").val(data.city);
+        $("#zipCode").val(data.zip_code);
+
+        $("#personal-info-form").validate({
+          rules: {
+            password: "required",
+            password_confirmation: "required",
+            email: {
+              required: true,
+              email: true,
+            },
+          },
+          invalidHandler: function (event, validator) {
+            $(".alert-danger").show();
+            console.log("Invalid form");
+          },
+          submitHandler: function (form, event) {
+            event.preventDefault();
+            let data = {};
+            $.each($(form).serializeArray(), function () {
+              console.log(this.name, this.value);
+              data[this.name] = this.value;
+            });
+
+            console.log("valid form", data);
+            RestClient.post(
+              "users/me",
+              data,
+              function (response) {
+                console.log("Account updated", response);
+              },
+              function (error) {
+                $(".alert-danger").show();
+              }
+            );
+          },
         });
-    }, 0);
-  },
-});
+      });
+    },
+  });
 
-app.route({
-  view: "contact",
-  load: "contact.html",
-  onCreate: function () {},
-  onReady: function () {
-    activePage();
-    console.log("Contact is ready");
-    initContactForm("contact-form");
-  },
-});
+  app.route({
+    view: "sign-up",
+    load: "sign-up.html",
+    onCreate: function () {},
+    onReady: function () {
+      console.log("Sign up is ready");
+      $(".alert-danger").hide();
+      $("#signup-form").validate({
+        rules: {
+          password: "required",
+          password_confirmation: "required",
+          email: {
+            required: true,
+            email: true,
+          },
+        },
+        invalidHandler: function (event, validator) {
+          $(".alert-danger").show();
+          console.log("Invalid form");
+        },
+        submitHandler: function (form, event) {
+          event.preventDefault();
+          let data = {};
+          $.each($(form).serializeArray(), function () {
+            console.log(this.name, this.value);
+            data[this.name] = this.value;
+          });
 
-app.route({
-  view: "booking",
-  load: "booking.html",
-  onCreate: function () {},
-  onReady: function () {
-    activePage();
-    console.log("Booking is ready");
-    initBookingForm("booking-form");
-  },
+          console.log("valid form", data);
+          RestClient.post(
+            "users",
+            data,
+            function (response) {
+              console.log("User added", response);
+              form.reset();
+              $(".alert-success").show();
+            },
+            function (error) {
+              console.log("Error adding user", error);
+              $(".alert-danger").show();
+            }
+          );
+        },
+      });
+    },
+  });
+
+  app.run();
 });
 
 function initContactForm(form_id) {
@@ -122,7 +250,7 @@ function initContactForm(form_id) {
 
       console.log("valid form", data);
       RestClient.post(
-        "add_inquiries.php",
+        "inquiry",
         data,
         function (response) {
           console.log("Inquiry sent", response);
@@ -158,7 +286,7 @@ function initBookingForm(form_id) {
 
       console.log("valid form", data);
       RestClient.post(
-        "add_bookings.php",
+        "bookings",
         data,
         function (response) {
           console.log("Booking added", response);
@@ -174,46 +302,8 @@ function initBookingForm(form_id) {
   });
 }
 
-function signup(form) {
-  let formData = {};
-  new FormData(form).forEach((value, key) => {
-    formData[key] = value;
-  });
-
-  if (formData.password === formData.passwordconfirm) {
-    console.log(formData);
-    alert("Sign up successful!");
-    window.location.href = "#account";
-    form.reset();
-  } else {
-    alert("Passwords do not match. Please try again.");
-  }
-}
-
-function login(enteredUsername, enteredPassword) {
-  fetch(
-    "/Web_programming_2024_edadic/web-project/edadic-Web_programming_2024_edadic/json/users.json"
-  )
-    .then((response) => response.json())
-    .then((users) => {
-      let user = users.find(
-        (user) =>
-          user.email === enteredUsername && user.password === enteredPassword
-      );
-
-      if (user) {
-        console.log(user);
-        alert("Login successful");
-        window.location.href = "#home";
-      } else {
-        alert("You don't have an account yet. Please sign up.");
-      }
-    })
-    .catch((error) => console.error("Error:", error));
-}
-
 function fetchTestimonials() {
-  RestClient.get("get_testimonials.php", function (data) {
+  RestClient.get("testimonials", function (data) {
     console.log("Rest client data: ", data);
     const testimonialsContainer = document.getElementById(
       "testimonials-container"
@@ -238,7 +328,7 @@ function fetchTestimonials() {
 }
 
 function fetchTeamMembers(container_id) {
-  RestClient.get("get_team_members.php", function (data) {
+  RestClient.get("team_member", function (data) {
     console.log("Rest client data: ", data);
     const teamContainer = document.getElementById(container_id);
     console.log("teamContainer", teamContainer);
@@ -269,7 +359,7 @@ function fetchTeamMembers(container_id) {
 }
 
 function fetchAnimals() {
-  RestClient.get("get_animals.php", function (data) {
+  RestClient.get("animal", function (data) {
     console.log("Rest client data: ", data);
     const dogs = [];
     const cats = [];
@@ -339,12 +429,3 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
-
-function activePage() {
-  $(".nav-item.nav-link").click(function () {
-    $(".nav-item.nav-link").removeClass("active");
-    $(this).addClass("active");
-  });
-}
-
-app.run();

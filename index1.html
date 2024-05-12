@@ -25,10 +25,6 @@
 
     <!-- Libraries Stylesheet -->
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
-    <link
-      href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css"
-      rel="stylesheet"
-    />
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet" />
@@ -38,6 +34,20 @@
     <script src="js/jquery.spapp.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript Libraries -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/utils/constants.js"></script>
+    <script src="js/utils/rest_client.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/script.js"></script>
   </head>
 
   <body>
@@ -139,12 +149,14 @@
           <li class="nav-item">
             <a class="nav-link" href="#contact">Contact</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item d-none" id="account-link">
             <a class="nav-link" href="#account">Account</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#log-in">Login</a>
+            <a class="nav-link" id="login-link" href="#log-in">Login</a>
           </li>
+          <li class="nav-item d-none" id="logout-link">
+            <a class="nav-link" href="#logout">Logout</a>
         </ul>
       </div>
     </nav>
@@ -159,6 +171,7 @@
       <section id="account" data-load="account.html"></section>
       <section id="log-in" data-load="log-in.html"></section>
       <section id="sign-up" data-load="sign-up.html"></section>
+      <section id="logout" data-load="logout.html"></section>
     </main>
 
     <!-- Footer Start -->
@@ -231,31 +244,5 @@
     <a href="#" class="btn btn-lg btn-primary back-to-top"
       ><i class="fa fa-angle-double-up"></i
     ></a>
-
-    <script>
-      var app = $.spapp({
-        defaultView: "#home",
-        templateDir: "./views/",
-      });
-      app.run();
-    </script>
-
-    <!-- JavaScript Libraries -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
-    <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="js/utils/constants.js"></script>
-    <script src="js/utils/rest_client.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/script.js"></script>
   </body>
 </html>
