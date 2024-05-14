@@ -11,6 +11,9 @@ class TeamMemberDao extends BaseDao
 
     public function get_team_members()
     {
-        return $this->query("SELECT * FROM team_members", []);
+        return $this->query("SELECT u.name, u.image, u.`position` , u.facebook , u.twitter , u.instagram , u.linkedin
+        FROM users u
+        JOIN roles r  ON u.role_id = r.ID 
+        WHERE r.name  = 'team member';", []);
     }
 }

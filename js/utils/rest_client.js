@@ -1,8 +1,13 @@
 var RestClient = {
   get: function (url, callback, error_callback) {
+    let token = localStorage.getItem("token");
+
     $.ajax({
       url: Constants.API_BASE_URL + url,
       type: "GET",
+      headers: {
+        Authentication: token,
+      },
       success: function (response) {
         if (callback) callback(response);
       },
@@ -12,9 +17,13 @@ var RestClient = {
     });
   },
   request: function (url, method, data, callback, error_callback) {
+    let token = localStorage.getItem("token");
     $.ajax({
       url: Constants.API_BASE_URL + url,
       type: method,
+      headers: {
+        Authentication: token,
+      },
       data: data,
     })
       .done(function (response, status, jqXHR) {
