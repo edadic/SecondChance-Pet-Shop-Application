@@ -10,6 +10,9 @@
      *      path="/testimonials",
      *      tags={"testimonials"},
      *      summary="Get all testimonials",
+     *      security={
+     *          {"ApiKey": {}}
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Get all testomonials"
@@ -17,9 +20,7 @@
      * )
      */
     Flight::route('GET /testimonials', function() {
-
         $data = Flight::get('testimonials_service')->get_testimonials();
-
         Flight::json(
             $data
         );

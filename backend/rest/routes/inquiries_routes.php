@@ -1,6 +1,5 @@
 <?php
     require_once __DIR__ . '/../services/inquiries_service.class.php';
-    require_once __DIR__ . '/../utils.php';
     
     Flight::set('inquiries_service', new InquiryService());
 /**
@@ -8,6 +7,9 @@
      *      path="/inquiry",
      *      tags={"inquiries"},
      *      summary="Post an inquiry",
+     *      security={
+     *          {"ApiKey": {}}
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Post an inquiry"
@@ -26,7 +28,6 @@
      * )
      */
     Flight::route('POST /inquiry', function() { 
-        authenticate();
         $data = Flight::request()->data->getData();
         $inquiry = Flight::get('inquiries_service')->add_inquiries($data);
         Flight::json(

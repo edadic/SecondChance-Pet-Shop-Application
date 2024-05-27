@@ -1,6 +1,5 @@
 <?php
     require_once __DIR__ . '/../services/users_service.class.php';
-    require_once __DIR__ . '/../utils.php';
 
     Flight::set('users_service', new UserService());
 /**
@@ -49,6 +48,9 @@
      *      path="/users",
      *      tags={"users"},
      *      summary="Get all users",
+     *      security={
+     *          {"ApiKey": {}}
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Get all users"
@@ -67,6 +69,9 @@
      *      path="/user",
      *      tags={"users"},
      *      summary="Get user by id",
+     *      security={
+     *          {"ApiKey": {}}
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="User data or false if user does not exist"
@@ -86,6 +91,9 @@
      *      path="/users/current",
      *      tags={"users"},
      *      summary="Get current user",
+     *      security={
+     *          {"ApiKey": {}}
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Get current user"
@@ -93,7 +101,6 @@
      * )
      */
     Flight::route('GET /users/current', function() {
-        authenticate();
         $current_user_id = Flight::get('user');
         $user = Flight::get('users_service')->get_user_by_id($current_user_id);
         Flight::json(
@@ -106,6 +113,9 @@
      *      path="/users/me",
      *      tags={"users"},
      *      summary="Update current user information",
+     *      security={
+     *          {"ApiKey": {}}
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Update current user"
@@ -126,7 +136,6 @@
      * )
      */
     Flight::route('POST /users/me', function() {
-        authenticate();
         $current_user_id = Flight::get('user');
         $data = Flight::request()->data->getData();
         
@@ -135,3 +144,25 @@
             $user
         );
     });
+/**
+     * @OA\Delete(
+     *      path="/users/current",
+     *      tags={"users"},
+     *      summary="Delete current user",
+     *      security={
+     *          {"ApiKey": {}}
+     *      },
+     *      @OA\Response(
+     *           response=200,
+     *           description="Deleted user data"
+     *      ),
+     *      @OA\Parameter(@OA\Schema(type="number"), in="query", name="user_id", example="1", description="User ID")
+     * )
+     */
+    Flight::route('DELETE /users/current', function() {
+        $current_user_id = Flight::get('user');
+        Flight::get('users_service')->delete_user($current_user_id);
+        Flight::json(["message" => "User deleted successfully"]);
+    });
+
+

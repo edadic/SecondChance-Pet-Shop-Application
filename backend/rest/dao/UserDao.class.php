@@ -31,6 +31,11 @@ class UserDao extends BaseDao {
         $entity['id'] = $id;
         $stmt->execute($entity);
     }
+
+    public function delete_user_by_id($user_id){
+        $this->execute("DELETE FROM users WHERE id = :id", ["id" => $user_id]);
+    }
+        
     public function get_all_users() {
         return $this->query("SELECT * FROM users", []);
     }

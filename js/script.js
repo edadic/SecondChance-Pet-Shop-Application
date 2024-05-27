@@ -47,6 +47,7 @@ $(document).ready(function () {
       fetchAnimals();
     },
   });
+
   //Logout app route
   app.route({
     view: "logout",
@@ -141,6 +142,7 @@ $(document).ready(function () {
         $("#addressLine2").val(data.address_line2);
         $("#city").val(data.city);
         $("#zipCode").val(data.zip_code);
+        $("#image").attr("src", data.image);
 
         $("#personal-info-form").validate({
           rules: {
@@ -168,15 +170,18 @@ $(document).ready(function () {
               "users/me",
               data,
               function (response) {
+                alert("Account updated successfully");
                 console.log("Account updated", response);
               },
               function (error) {
+                alert("Account update failed. Please try again.");
                 $(".alert-danger").show();
               }
             );
           },
         });
       });
+      deleteUser();
     },
   });
 
@@ -214,10 +219,13 @@ $(document).ready(function () {
             data,
             function (response) {
               console.log("User added", response);
+              alert("Sign up successful. Please login.");
+              window.location.hash = "#log-in";
               form.reset();
               $(".alert-success").show();
             },
             function (error) {
+              alert("Sign up unsuccessful. Please try again.");
               console.log("Error adding user", error);
               $(".alert-danger").show();
             }
@@ -254,10 +262,12 @@ function initContactForm(form_id) {
         data,
         function (response) {
           console.log("Inquiry sent", response);
+          alert("Inquiry sent successfully");
           form.reset();
           $(".alert-success").show();
         },
         function (error) {
+          alert("Inquiry not sent. Please try again.");
           console.log("Error adding contact", error);
           $(".alert-danger").show();
         }
@@ -379,6 +389,29 @@ function fetchAnimals() {
     populateAnimals(dogs, "dogs-row");
     populateAnimals(cats, "cats-row");
     populateAnimals(therapyAnimals, "therapy-row");
+  });
+}
+
+function deleteUser() {
+  $("#delete-button").on("click", function () {
+    const confirmed = confirm("Are you sure you want to delete your account?");
+    if (confirmed) {
+      RestClient.delete(
+        "users/current",
+        {},
+        function (response) {
+          console.log("User deleted", response);
+          window.localStorage.clear();
+          alert("User deleted successfully");
+          window.location.hash = "#home";
+          window.location.reload();
+        },
+        function (error) {
+          console.error("Error deleting user", error);
+          alert("Failed to delete account. Please try again.");
+        }
+      );
+    }
   });
 }
 
