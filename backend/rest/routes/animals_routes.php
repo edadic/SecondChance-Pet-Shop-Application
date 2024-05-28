@@ -11,6 +11,9 @@
      *      path="/animal",
      *      tags={"animals"},
      *      summary="Get all animals",
+     *      security={
+     *          {"ApiKey": {}}
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Get all animals"
@@ -19,9 +22,7 @@
      */
 
     Flight::route('GET /animal', function() {
-
         $data = Flight::get('animals_service')->get_animals();
-
         Flight::json(
             $data
         );

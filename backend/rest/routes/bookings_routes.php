@@ -1,6 +1,5 @@
 <?php
     require_once __DIR__ . '/../services/bookings_service.class.php';
-    require_once __DIR__ . '/../utils.php';
     
     Flight::set('bookings_service', new BookingService());
 
@@ -9,6 +8,9 @@
      *      path="/bookings",
      *      tags={"bookings"},
      *      summary="Post a booking",
+     *      security={
+     *          {"ApiKey": {}}
+     *      },
      *      @OA\Response(
      *           response=200,
      *           description="Post a booking"
@@ -27,10 +29,7 @@
      * )
      */
     Flight::route('POST /bookings', function() {
-        authenticate();
         $data = Flight::request()->data->getData();
-
-
         $booking = Flight::get('bookings_service')->add_bookings($data);
         Flight::json(
             $booking

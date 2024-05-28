@@ -11,6 +11,7 @@ Flight::route('/', function () {
   echo password_hash("eldar123", PASSWORD_DEFAULT);
 });
 
+require 'rest/routes/middleware_routes.php';
 require 'rest/routes/auth_routes.php';
 require 'rest/routes/animals_routes.php';
 require 'rest/routes/team_members_routes.php';

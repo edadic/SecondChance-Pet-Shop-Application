@@ -7,6 +7,26 @@
 
     Flight::set('auth_service', new AuthService());
 
+    /**
+     * @OA\Post(
+     *      path="/login",
+     *      tags={"auth"},
+     *      summary="Login to system",
+     *      @OA\Response(
+     *           response=200,
+     *           description="User data and JWT token"
+     *      ),
+     *      @OA\RequestBody(
+     *          description="User credentials",
+     *          @OA\JsonContent(
+     *             required={"email", "password"},
+     *             @OA\Property(property="email", required=true, type="string", example="dadiceldar@gmail.com"),
+     *             @OA\Property(property="password", required=true, type="string", example="pass")
+     *           )
+     *      ),
+     * )
+     */
+
     Flight::route('POST /login', function() {
         $payload = Flight::request()->data->getData();
 
@@ -26,7 +46,7 @@
 
         $token = JWT::encode(
             $jwt_payload,
-            JWT_SECRET,
+            Config::JWT_SECRET(),
             'HS256'
         );
 
