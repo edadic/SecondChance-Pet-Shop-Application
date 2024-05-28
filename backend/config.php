@@ -29,11 +29,3 @@ class Config {
         return isset($_ENV[$name]) && trim($_ENV[$name]) != "" ? $_ENV[$name] : $default;
     }
 }
-// Database access credentials
-// define('DB_NAME', 'SecondChance');
-// define('DB_PORT', 3306);
-// define('DB_USER', 'root');
-// define('DB_PASSWORD', '12345678');
-// define('DB_HOST', '127.0.0.1'); // localhost
-
-// define('JWT_SECRET', ',dpPL,Se%fM-UVQBwf/X0T&B!DF6%}');
