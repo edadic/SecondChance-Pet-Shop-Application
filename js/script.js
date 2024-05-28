@@ -21,7 +21,7 @@ $(document).ready(function () {
     onCreate: function () {},
     onReady: function () {
       console.log("Home is ready");
-      console.log("constants", Constants.API_BASE_URL);
+      console.log("constants", Constants.get_api_base_url());
       initBookingForm("booking-form-home");
       fetchTestimonials();
       fetchTeamMembers("team-members");
